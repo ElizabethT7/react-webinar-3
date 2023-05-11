@@ -62,7 +62,8 @@ class Store {
    * Удаление записи по коду
    * @param code
    */
-  deleteItem(code) {
+  deleteItem(code, e) {
+    e.stopPropagation();
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code)
@@ -73,7 +74,8 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
+  selectItem(code, e) {
+    e.stopPropagation();
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
