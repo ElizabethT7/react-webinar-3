@@ -54,7 +54,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.addItemNumber(), title: 'Новая запись'}]
+      list: [...this.state.list, {code: this.addItemNumber(), title: 'Новая запись', selectCount: 0}]
     })
   };
 
@@ -80,6 +80,7 @@ class Store {
         (item.code !== code && item.selected) ? item.selected = !item.selected : item.selected = item.selected;
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) item.selectCount = item.selectCount + 1;
         }
         return item;
       })
