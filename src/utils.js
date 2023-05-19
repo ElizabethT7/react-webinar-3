@@ -49,3 +49,15 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
+
+/**
+ * подсчет общей суммы заказа
+ * @returns {Number}
+ */
+export function countTotalPrice(array) {
+  console.log(array)
+  return array.reduce((sum, item) => {
+    console.log(item.price, item.count)
+    return sum + item.price * item.count;
+  }, 0);
+} 
