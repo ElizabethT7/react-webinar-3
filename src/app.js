@@ -3,7 +3,7 @@ import List from './components/list';
 import Cart from './components/cart';
 import Head from './components/head';
 import Modal from './components/modal';
-import { countTotalPrice } from './utils';
+import ModalList from './components/modal-list';
 import PageLayout from './components/page-layout';
 
 /**
@@ -14,7 +14,6 @@ import PageLayout from './components/page-layout';
 function App({store}) {
   const [order, setOrder] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(order)
 
   const list = store.getState().list;
 
@@ -42,24 +41,30 @@ function App({store}) {
     }
   }
 
+  const onDeleteItemFromCart = (code) => {
+    const newOrder = order.filter((e) => e.code !== code);
+    setOrder(newOrder);
+  }
+
   const callbacks = {
     onModalOpen: useCallback(() => {
       setIsOpen(!isOpen);
-      console.log(isOpen)
     })
   }
 
   return (
     <PageLayout>
       <Head title='Магазин'/>
-      <Cart count={order.length}
-            onModalOpen={callbacks.onModalOpen}
+      <Cart onModalOpen={callbacks.onModalOpen}
             order={order}
             isOpen={isOpen}/>
       <Modal active={isOpen}
-             setActive={setIsOpen}/>
+             setActive={setIsOpen}>
+        <ModalList order={order} onDelete={onDeleteItemFromCart}/>
+      </Modal>
       <List list={list}
-            onAddItemToCart={onAddItemToCart}/>
+            type='main'
+            onClickItem={onAddItemToCart}/>
     </PageLayout>
   );
 }

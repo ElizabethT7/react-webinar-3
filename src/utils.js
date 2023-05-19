@@ -55,9 +55,7 @@ export function generateCode2() {
  * @returns {Number}
  */
 export function countTotalPrice(array) {
-  console.log(array)
   return array.reduce((sum, item) => {
-    console.log(item.price, item.count)
     return sum + item.price * item.count;
   }, 0);
 } 
