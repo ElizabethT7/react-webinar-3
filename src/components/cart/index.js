@@ -3,6 +3,7 @@ import PropTypes, { number } from 'prop-types';
 import Controls from "../controls";
 import {plural, countTotalPrice} from "../../utils";
 import './style.css';
+import Modal from "../modal";
 
 function Cart({count, order, onModalOpen}){
   return ( 

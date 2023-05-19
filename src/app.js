@@ -2,6 +2,7 @@ import React, {useCallback, useState} from 'react';
 import List from './components/list';
 import Cart from './components/cart';
 import Head from './components/head';
+import Modal from './components/modal';
 import { countTotalPrice } from './utils';
 import PageLayout from './components/page-layout';
 
@@ -53,7 +54,10 @@ function App({store}) {
       <Head title='Магазин'/>
       <Cart count={order.length}
             onModalOpen={callbacks.onModalOpen}
-            order={order}/>
+            order={order}
+            isOpen={isOpen}/>
+      <Modal active={isOpen}
+             setActive={setIsOpen}/>
       <List list={list}
             onAddItemToCart={onAddItemToCart}/>
     </PageLayout>
