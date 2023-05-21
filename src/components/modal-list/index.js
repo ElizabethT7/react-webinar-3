@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import List from '../list';
-import { countTotalPrice } from '../../utils';
+import { countTotalPrice, numberFormat } from '../../utils';
 import './style.css';
 
 function ModalList({order, onDelete}){
@@ -14,7 +14,7 @@ function ModalList({order, onDelete}){
         <div className='ModalList-result-content'>
           <b className='ModalList-result'>Итого: </b>
           { totalPrice &&
-            <b className='ModalList-result'>{totalPrice} ₽</b>
+            <b className='ModalList-result'>{numberFormat(totalPrice)}</b>
           }
         </div>
   </div>

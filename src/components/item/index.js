@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {plural} from "../../utils";
+import {numberFormat} from "../../utils";
 import './style.css';
 
 function Item(props){
@@ -19,8 +19,7 @@ function Item(props){
         {props.item.title}
       </div>
       <div className='Item-price'>
-        {props.item.price}
-        <span className='Item-price-symbol'>₽</span>
+        {numberFormat(props.item.price)}
       </div>
       <div className='Item-actions'>
         <button onClick={callbacks.onAddToCart}>

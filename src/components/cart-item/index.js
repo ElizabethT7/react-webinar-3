@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {numberFormat} from "../../utils";
 import './style.css';
 
 function CartItem(props){
@@ -18,8 +19,7 @@ function CartItem(props){
         {props.item.title}
       </div>
       <div className='CartItem-price'>
-        {props.item.price}
-        <span className='CartItem-price-symbol'>₽</span>
+        {numberFormat(props.item.price)}
       </div>
       <div className='CartItem-count'>
         {props.item.count}

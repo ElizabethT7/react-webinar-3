@@ -58,4 +58,9 @@ export function countTotalPrice(array) {
   return array.reduce((sum, item) => {
     return sum + item.price * item.count;
   }, 0);
-} 
+}
+
+//Отображаем формат числа у цены
+export function numberFormat(value, locale = 'ru-RU', currency = 'RUB') {
+  return value.toLocaleString(locale, { style: 'currency', currency: currency, minimumFractionDigits: 0 }) || '';
+}

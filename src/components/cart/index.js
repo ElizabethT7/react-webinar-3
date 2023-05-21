@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Controls from '../controls';
-import {plural, countTotalPrice} from '../../utils';
+import {plural, countTotalPrice, numberFormat} from '../../utils';
 import './style.css';
 function Cart({order, onModalOpen}){
   const count = order.length;
@@ -12,7 +12,7 @@ function Cart({order, onModalOpen}){
         В корзине:
         {count ?
         <b className='Cart-text'>
-          {count} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / {countTotalPrice(order)} ₽
+          {count} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / {numberFormat(countTotalPrice(order))}
         </b>
         : 
         <b className='Cart-text'>пусто</b>
