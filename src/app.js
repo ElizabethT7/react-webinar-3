@@ -5,7 +5,7 @@ import Head from './components/head';
 import Modal from './components/modal';
 import ModalList from './components/modal-list';
 import PageLayout from './components/page-layout';
-import {countTotalPrice, numberFormat} from './utils';
+import {numberFormat} from './utils';
 
 /**
  * Приложение
@@ -13,46 +13,21 @@ import {countTotalPrice, numberFormat} from './utils';
  * @returns {React.ReactElement}
  */
 function App({store}) {
-  const [order, setOrder] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const totalPrice = numberFormat(countTotalPrice(order));
-  const count = order.length;
-
   const list = store.getState().list;
-
-  const onAddItemToCart = (item) => {
-    const itemIndex = order.findIndex((orderItem) => orderItem.code === item.code);
-    if(itemIndex < 0) {
-      const newItem = {
-        ...item,
-        count: 1,
-      };
-      setOrder([...order, newItem]);
-    } else {
-      const newOrder = order.map((orderItem, code) => {
-        if(code === itemIndex) {
-          return {
-            ...orderItem,
-            count: orderItem.count + 1
-
-          }
-        } else {
-          return orderItem;
-        }
-      })
-      setOrder(newOrder);
-    }
-  }
-
-  const onDeleteItemFromCart = (code) => {
-    const newOrder = order.filter((e) => e.code !== code);
-    setOrder(newOrder);
-  }
-
+  const order = store.getState().order;
+  const totalPrice = numberFormat(store.getState().cartTotalPrice);
+  const orderLength = store.getState().orderLength;
+  const [isOpen, setIsOpen] = useState(false);
   const callbacks = {
     onModalOpen: useCallback(() => {
       setIsOpen(!isOpen);
-    })
+    }),
+    onAddItemToCart: useCallback((item) => {
+      store.addItemToCart(item);
+    }, [store]),
+    onDeleteItemFromCart: useCallback((item) => {
+      store.deleteItemFromCart(item);
+    }, [store])
   }
 
   return (
@@ -60,17 +35,17 @@ function App({store}) {
       <Head title='Магазин'/>
       <Cart onModalOpen={callbacks.onModalOpen}
             totalPrice={totalPrice}
-            count={count}
+            count={orderLength}
             isOpen={isOpen}/>
       <Modal active={isOpen}
              setActive={setIsOpen}>
         <ModalList order={order}
                    totalPrice={totalPrice}
-                   onDelete={onDeleteItemFromCart}/>
+                   onDelete={callbacks.onDeleteItemFromCart}/>
       </Modal>
       <List list={list}
             type='main'
-            onClickItem={onAddItemToCart}/>
+            onClickItem={callbacks.onAddItemToCart}/>
     </PageLayout>
   );
 }

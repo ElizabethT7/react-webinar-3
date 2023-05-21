@@ -8,7 +8,7 @@ function CartItem(props){
   const callbacks = {
     onDeleteFromCart: (e) => {
       e.stopPropagation();
-      props.onDeleteFromCart(props.item.code);
+      props.onDeleteFromCart(props.item);
     }
   }
 

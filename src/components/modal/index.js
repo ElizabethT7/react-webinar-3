@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from '../head';
-
 import './style.css';
 
 function Modal({active, setActive, children}){
