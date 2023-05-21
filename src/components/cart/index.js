@@ -1,18 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Controls from '../controls';
-import {plural, countTotalPrice, numberFormat} from '../../utils';
+import {plural} from '../../utils';
 import './style.css';
-function Cart({order, onModalOpen}){
-  const count = order.length;
-
+function Cart({count, totalPrice, onModalOpen}){
   return ( 
     <div className='Cart'>
       <div className='Cart-content'>
         В корзине:
         {count ?
         <b className='Cart-text'>
-          {count} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / {numberFormat(countTotalPrice(order))}
+          {count} {plural(count, {one: 'товар', few: 'товара', many: 'товаров'})} / {totalPrice}
         </b>
         : 
         <b className='Cart-text'>пусто</b>
@@ -24,16 +22,13 @@ function Cart({order, onModalOpen}){
 }
 
 Cart.propTypes = {
-  order: PropTypes.arrayOf(PropTypes.shape({
-    code: PropTypes.number,
-    title: PropTypes.string,
-    count: PropTypes.number,
-  })).isRequired,
+  totalPrice: PropTypes.string,
+  count: PropTypes.number,
+  onModalOpen: PropTypes.func,
 };
 
 Cart.defaultProps = {
   onModalOpen: () => {},
-  order: [],
 }
 
 export default React.memo(Cart);

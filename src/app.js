@@ -5,6 +5,7 @@ import Head from './components/head';
 import Modal from './components/modal';
 import ModalList from './components/modal-list';
 import PageLayout from './components/page-layout';
+import {countTotalPrice, numberFormat} from './utils';
 
 /**
  * Приложение
@@ -14,6 +15,8 @@ import PageLayout from './components/page-layout';
 function App({store}) {
   const [order, setOrder] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const totalPrice = numberFormat(countTotalPrice(order));
+  const count = order.length;
 
   const list = store.getState().list;
 
@@ -56,11 +59,14 @@ function App({store}) {
     <PageLayout>
       <Head title='Магазин'/>
       <Cart onModalOpen={callbacks.onModalOpen}
-            order={order}
+            totalPrice={totalPrice}
+            count={count}
             isOpen={isOpen}/>
       <Modal active={isOpen}
              setActive={setIsOpen}>
-        <ModalList order={order} onDelete={onDeleteItemFromCart}/>
+        <ModalList order={order}
+                   totalPrice={totalPrice}
+                   onDelete={onDeleteItemFromCart}/>
       </Modal>
       <List list={list}
             type='main'

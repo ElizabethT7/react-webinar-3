@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import List from '../list';
-import { countTotalPrice, numberFormat } from '../../utils';
 import './style.css';
 
-function ModalList({order, onDelete}){
-  const totalPrice = countTotalPrice(order);
+function ModalList({order, totalPrice, onDelete}){
   return ( 
     <div className='ModalList'>
       <List list={order}
@@ -14,7 +12,7 @@ function ModalList({order, onDelete}){
         <div className='ModalList-result-content'>
           <b className='ModalList-result'>Итого: </b>
           { totalPrice &&
-            <b className='ModalList-result'>{numberFormat(totalPrice)}</b>
+            <b className='ModalList-result'>{totalPrice}</b>
           }
         </div>
   </div>
@@ -23,6 +21,12 @@ function ModalList({order, onDelete}){
 
 ModalList.propTypes = {
   onDelete: PropTypes.func,
+  totalPrice: PropTypes.string,
+  order:PropTypes.arrayOf(PropTypes.shape({
+    code: PropTypes.number,
+    title: PropTypes.string,
+    count: PropTypes.number,
+  })).isRequired,
 };
 
 ModalList.defaultProps = {
