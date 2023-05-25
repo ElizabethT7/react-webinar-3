@@ -1,8 +1,12 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
-import Main from "./main";
-import Basket from "./basket";
-import useStore from "../store/use-store";
-import useSelector from "../store/use-selector";
+//import {useCallback, useContext, useEffect, useState} from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Main from './pages/main';
+import Article from './pages/article';
+import Basket from './basket';
+import NotFound from './pages/not-found';
+//import useStore from "../store/use-store";
+import useSelector from '../store/use-selector';
+
 
 /**
  * Приложение
@@ -14,7 +18,13 @@ function App() {
 
   return (
     <>
-      <Main/>
+      <Router>
+        <Routes>
+          <Route index path='/' element={<Main/>}/>
+          <Route path='/article' element={<Article/>}/>
+          <Route path='/*' element={<NotFound/>}/>
+        </Routes>
+      </Router>
       {activeModal === 'basket' && <Basket/>}
     </>
   );
