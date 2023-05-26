@@ -42,9 +42,9 @@ function Article() {
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <ItemArticle item={select.item}
-                   category={select.category}
-                   madeIn={select.madeIn}
-                   onAdd={callbacks.addToBasket}/>
+                  category={select.category}
+                  madeIn={select.madeIn}
+                  onAdd={callbacks.addToBasket}/>
     </PageLayout>
   );
 }

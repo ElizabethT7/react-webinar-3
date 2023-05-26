@@ -24,8 +24,8 @@ function App() {
           <Route path='/article/:id' element={<Article/>}/>
           <Route path='/*' element={<NotFound/>}/>
         </Routes>
+        {activeModal === 'basket' && <Basket/>}
       </Router>
-      {activeModal === 'basket' && <Basket/>}
     </>
   );
 }
