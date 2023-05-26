@@ -21,7 +21,7 @@ function App() {
       <Router>
         <Routes>
           <Route index path='/' element={<Main/>}/>
-          <Route path='/article' element={<Article/>}/>
+          <Route path='/article/:id' element={<Article/>}/>
           <Route path='/*' element={<NotFound/>}/>
         </Routes>
       </Router>
