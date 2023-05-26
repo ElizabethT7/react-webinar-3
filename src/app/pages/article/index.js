@@ -19,7 +19,7 @@ function Article() {
 
   useEffect(() => {
     store.actions.catalogItem.load(id);
-  }, []);
+  }, [id]);
 
   const select = useSelector(state => ({
     item: state.catalogItem.catalogItem,
