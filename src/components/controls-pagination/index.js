@@ -3,7 +3,7 @@ import {cn as bem} from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import './style.css';
 
-function ControlsPagination({onSelect}){
+function ControlsPagination({onSelect, currentPage}){
 
   const onClick = (e) => {
     onSelect(e.target.value);
@@ -14,22 +14,26 @@ function ControlsPagination({onSelect}){
 
   return (
     <div className={cn()}>
-      <button className={cn('item')} onClick={onClick} value="1">1</button>
-      <button className={'ControlsPagination-item' + /*(isSelected ?*/ ' ControlsPagination_selected' /*: '')*/ }
-            onClick={onClick}
-            value="2">
-        2
-      </button>
-      <button className={cn('item')}
-       onClick={onClick} value="3">3</button>
+      <button className={currentPage == '1' ? cn('item', {selected: true}) : cn('item')}
+              onClick={onClick}
+              value="1">1</button>
+      <button className={currentPage == '2' ? cn('item', {selected: true}) : cn('item')}
+              onClick={onClick}
+              value="2">2</button>
+      <button className={currentPage == '3' ? cn('item', {selected: true}) : cn('item')}
+              onClick={onClick}
+              value="3">3</button>
       <span className={cn('points')}>...</span>
-      <button className={cn('item')} onClick={onClick} value="25">25</button>
+      <button className={currentPage == '100' ? cn('item', {selected: true}) : cn('item')}
+              onClick={onClick}
+              value="100">100</button>
     </div>
   )
 }
 
 ControlsPagination.propTypes = {
-  onSelect: PropTypes.func
+  currentPage: PropTypes.number,
+  onSelect: PropTypes.func,
 };
 
 ControlsPagination.defaultProps = {

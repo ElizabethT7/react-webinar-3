@@ -4,13 +4,13 @@
   padding: 20px;
 }
 
-.ControlsPagination_selected {
+.ControlsPagination-item_selected {
   background-color: #0087E9;
   color: #ffffff;
 }
 
 .ControlsPagination-item {
-  width: 20px;
+  min-width: 20px;
   height: 20px;
   text-align: center;
   font-weight: 400;
