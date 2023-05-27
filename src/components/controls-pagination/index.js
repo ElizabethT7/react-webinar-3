@@ -32,11 +32,16 @@ function ControlsPagination({onSelect, currentPage}){
 
   return (
     <div className={cn()}>
-      {pages && pages.map((el, index) =>  
+      {pages && pages.map((el, index) =>
+        <div key={index}>
+          { el == '...' ? 
+        <span className={cn('points')}>...</span>
+        : 
         <button className={currentPage == el ? cn('item', {selected: true}) : cn('item')}
-        key={index}
-        onClick={onClick}
-        value={el}>{el}</button>
+                onClick={onClick}
+                value={el}>{el}</button>
+        }
+        </div>
         )
       }
     </div>
