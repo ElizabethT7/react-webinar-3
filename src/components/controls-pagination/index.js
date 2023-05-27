@@ -7,26 +7,38 @@ function ControlsPagination({onSelect, currentPage}){
 
   const onClick = (e) => {
     onSelect(e.target.value);
-    console.log(e.target.value)
   }
+
+  const options = {
+    1: [1, 2, 3 , '...', 100],
+    2: [1, 2, 3 , '...', 100],
+    3: [1, 2, 3 , 4, '...', 100],
+    'page': [1,'...',  currentPage - 1, currentPage, currentPage + 1, '...',  100],
+    98: [1, '...',97, 98, 99, 100],
+    100: [1, '...', 98, 99, 100],
+  }
+
+  const getOptions = (currentPage) => {
+    if(currentPage < 3) return options[1];
+    if(currentPage == 3) return options[3];
+    if(currentPage == 98) return options[98];
+    if(currentPage == 100) return options[100];
+    if(currentPage > 3 && currentPage < 98) return options['page'];
+  }
+
+  let pages = getOptions(currentPage);
 
   const cn = bem('ControlsPagination');
 
   return (
     <div className={cn()}>
-      <button className={currentPage == '1' ? cn('item', {selected: true}) : cn('item')}
-              onClick={onClick}
-              value="1">1</button>
-      <button className={currentPage == '2' ? cn('item', {selected: true}) : cn('item')}
-              onClick={onClick}
-              value="2">2</button>
-      <button className={currentPage == '3' ? cn('item', {selected: true}) : cn('item')}
-              onClick={onClick}
-              value="3">3</button>
-      <span className={cn('points')}>...</span>
-      <button className={currentPage == '100' ? cn('item', {selected: true}) : cn('item')}
-              onClick={onClick}
-              value="100">100</button>
+      {pages && pages.map((el, index) =>  
+        <button className={currentPage == el ? cn('item', {selected: true}) : cn('item')}
+        key={index}
+        onClick={onClick}
+        value={el}>{el}</button>
+        )
+      }
     </div>
   )
 }

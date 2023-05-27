@@ -29,7 +29,7 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     //получение номера страницы
-    getPage: useCallback((page) => store.actions.catalog.getPage(page)),
+    getPage: useCallback((page) => store.actions.catalog.getPage(page), [store]),
   }
 
   const renders = {
